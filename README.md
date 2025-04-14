@@ -15,14 +15,16 @@ The modal window should be opened via a button on the homepage
 When opening the filter modal, if the user has already selected some data previously, it should be pre-filled in the modal
 
 The user should be able to modify the data and click the `Apply` button. This action should open a confirmation dialog
+
 - If the user confirms the changes — the selected data should be saved to the global state (`App`)
 - If the user cancels — keep the previously saved data without applying the new changes
 
 Display the current selected filter data on the homepage in JSON format (no design required, just for debug/visibility)
 
 Types:
-  - `FilterItem` — input data format from API / `filterData.json`
-  - `SearchRequestFilter` — output data format to be displayed on the homepage
+
+- `FilterItem` — input data format from API / `filterData.json`
+- `SearchRequestFilter` — output data format to be displayed on the homepage
 
 ### What technologies to use
 
