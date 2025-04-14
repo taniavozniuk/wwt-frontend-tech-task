@@ -4,40 +4,50 @@
 
 ### What needs to be done
 
-- We have filter data that the API will send. They are located in the file `./src/temp/filterData.ts`
-- Based on this data, you need to make a filter modal window - https://www.figma.com/file/cnBVURUTntc8peGEfKexoY/WWT-Test-task?type=design&node-id=0%3A1&mode=design&t=GZ0EY5BJ6KB7iy02-1
-- As for the design - make it similar to the layout. Regarding the indents that may slightly differ from each other on the layout - make them the same.
+The API provides filter data located in the file `filterData.json`
 
-## More details
+Based on this data, create a filter modal window — [Figma design](https://www.figma.com/file/cnBVURUTntc8peGEfKexoY/WWT-Test-task?type=design&node-id=0%3A1&mode=design&t=GZ0EY5BJ6KB7iy02-1)
 
-- The modal window should open by a button from the main page, close when clicking on the cross, or on the background of the modal window
-- You need to do basic data saving in `App` in useState or zustand, at your discretion, with the type `SearchRequestFilter`
-- Take data for display through react-query from the json file
-- When opening the filter modal window, if there are already saved data that the user entered before - you need to display them
-- The user should be able to enter data, and then click the `Apply` button. After that, he should open a confirmation form
-  - If the user confirms - the data he selected should overwrite the data in `App`
-  - If the user does not confirm, that is, says not to apply new changes, use old data
-- Display on `App` the data that the user selected in the form of JSON (without design, just to see that everything works)
-- Also, you can try minimizing re-renders using memorization and more proper approaches
-- Think about developing this test as if you were working on a part of a big project
+The design should closely follow the layout. If indentations differ slightly in the layout — make them consistent across the modal
+
+The modal window should be opened via a button on the homepage
+
+When opening the filter modal, if the user has already selected some data previously, it should be pre-filled in the modal
+
+The user should be able to modify the data and click the `Apply` button. This action should open a confirmation dialog
+- If the user confirms the changes — the selected data should be saved to the global state (`App`)
+- If the user cancels — keep the previously saved data without applying the new changes
+
+Display the current selected filter data on the homepage in JSON format (no design required, just for debug/visibility)
+
+Types:
+  - `FilterItem` — input data format from API / `filterData.json`
+  - `SearchRequestFilter` — output data format to be displayed on the homepage
 
 ### What technologies to use
 
-- Git with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- Semantic layout - HTML 5
+Required:
+
+- Git with `Conventional Commits`
+- Semantic HTML layout
 - React
-- Data fetching for filters - react-query
-- UI library with all necessary ready-made components - Chakra UI
-- i18n - Internationalization
-- State-manager - zustand // Use if necessary
-- All other technologies that we have installed
+- react-query
+- tailwindcss
+- i18n
+- zustand
 
-### How to execute
+You may use other technologies already installed in the project, or install additional ones if needed
 
-- Make a fork into a PRIVATE repository
-- Complete the task
-- Add @ltlaitoff to the fork for review
-- Write to the telegram chat or email that the task is completed
+If you install any new technology, describe why you added it and what it’s used for in some file
+
+### How to submit the task
+
+- Create a **private** copy(not fork) of the repository, preserving the full commit history
+- Complete the task in this private repository
+- Add @ltlaitoff to the repository for review
+- Inform HR that the task is complete and ready for review
+
+Also, please let us know upfront whether you would like detailed feedback (what exactly was wrong and a score), or if a simple acceptance or rejection response is sufficient.
 
 ## How to set up the project
 
