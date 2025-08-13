@@ -1,0 +1,23 @@
+.modal-backdrop {
+	position: fixed;
+	inset: 0;
+	background: #1b1b1b4d;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	padding: 0 80px;
+}
+
+.modal-context {
+  padding: 40px 34px;
+	width: 100%;
+	background: white;
+	border-radius: 8px;
+    overflow-y: auto;
+  padding-right: 34px;
+  /* // flex-grow: 1; */
+  max-height: calc(90vh - 200px);
+  scrollbar-color: #c6c4c3 #ffffff;
+  scrollbar-width: thin;
+}
