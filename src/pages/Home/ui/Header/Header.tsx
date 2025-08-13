@@ -10,17 +10,17 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
 	return (
-		<header className="header">
-			<div className="headerLogo">
+		<header className="w-full h-15 flex items-center justify-between px-5">
+			<div className="flex-shrink-0 w-1/5 h-1/2">
 				<img
 					alt="logo"
-					className="logo"
+					className="w-full h-full object-contain"
 					src={logo}
 				/>
 			</div>
 			<div className="filter">
 				<button
-					className="buttonFilter"
+					className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center p-0 cursor-pointer"
 					onClick={onOpenModal}
 				>
 					<FilterIcon />

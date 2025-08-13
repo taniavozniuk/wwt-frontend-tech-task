@@ -5,7 +5,7 @@ import { Modal } from './Modal/Modal'
 
 export const App = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
-
+	const [selectedFilters, setSelectedFilters] = useState<string[]>([])
 	return (
 		<>
 			<Header onOpenModal={() => setIsOpenModal(true)} />
@@ -16,7 +16,16 @@ export const App = () => {
 				</h1>
 			</section>
 
-			{isOpenModal && <Modal onClose={() => setIsOpenModal(false)} />}
+			{isOpenModal && (
+				<Modal
+					onClose={() => setIsOpenModal(false)}
+					initialSelected={selectedFilters}
+					onConfirm={newFilters => {
+						setSelectedFilters(newFilters)
+						setIsOpenModal(false)
+					}}
+				/>
+			)}
 		</>
 	)
 }

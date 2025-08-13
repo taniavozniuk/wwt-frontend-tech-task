@@ -1,6 +1,6 @@
 /* eslint-disable i18next/no-literal-string */
 // без вимкення лінтера не пропускає текст(помилка)
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -13,20 +13,37 @@ import './Modal.css'
 
 interface ModalProps {
 	onClose: () => void
+	initialSelected: string[]
+	onConfirm: (filters: string[]) => void
 }
 
-export const Modal: React.FC<ModalProps> = ({ onClose }) => {
+export const Modal: React.FC<ModalProps> = ({
+	onClose,
+	initialSelected,
+	onConfirm
+}) => {
 	const modalRef = useRef<HTMLDivElement>(null)
+	const [selected, setSelected] = useState<string[]>(initialSelected)
 	useOutsideClick(modalRef, onClose)
 	const { data: filterData } = useQuery<FilterResponse>({
 		queryKey: ['filters'],
 		queryFn: fetchFilters
 	})
 
+	const toggleOption = (id: string) => {
+		setSelected(prev =>
+			prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+		)
+	}
+
+	const handleReset = () => {
+		setSelected([])
+	}
+
 	return (
-		<div className="modal-backdrop">
+		<div className="fixed inset-0 bg-black/30 flex items-center justify-center z-10 px-20">
 			<div
-				className="modal-context"
+				className="w-full max-h-[calc(90vh-200px)] bg-white rounded-lg overflow-y-auto p-10 pr-8 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-white"
 				ref={modalRef}
 			>
 				<div className="flex items-center justify-between">
@@ -57,6 +74,8 @@ export const Modal: React.FC<ModalProps> = ({ onClose }) => {
 								<input
 									type="checkbox"
 									className="flex text-black"
+									checked={selected.includes(option.id)}
+									onChange={() => toggleOption(option.id)}
 								/>
 								{option.name}
 							</label>
@@ -65,12 +84,20 @@ export const Modal: React.FC<ModalProps> = ({ onClose }) => {
 					</div>
 				))}
 
-				<div className="flex items-center justify-between mt-8">
-					<button className="w-[184px] h-[64px] items-center rounded-lg bg-orange-500">
+				<div className="relative mt-8 w-full flex items-center mt-8px">
+					<button
+						className="absolute left-1/2 -translate-x-1/2 w-[184px] h-[64px] rounded-lg bg-orange-500 text-white font-inter"
+						onClick={() => onConfirm(selected)}
+					>
 						apply
 					</button>
-
-					<p>Clear all parameters</p>
+					<p
+						className="ml-auto text-blue cursor-pointer underline"
+						style={{ color: '#078691' }}
+						onClick={handleReset}
+					>
+						Clear all parameters
+					</p>
 				</div>
 			</div>
 		</div>
