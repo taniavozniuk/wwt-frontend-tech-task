@@ -1,4 +1,3 @@
-/* eslint-disable i18next/no-literal-string */
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -41,13 +40,13 @@ export const ModalChange: React.FC<ModalChangeProps> = ({
 						onClick={onCancel}
 						className="w-[184px] h-[64px] rounded-lg bg-gray-300 text-black font-inter"
 					>
-						Use old filter
+						{t('modalChange.useOldFilter')}
 					</button>
 					<button
 						onClick={onConfirm}
 						className="w-[184px] h-[64px] rounded-lg bg-orange-500 text-white font-inter"
 					>
-						Apply new filter
+						{t('modalChange.applyNewFilter')}
 					</button>
 				</div>
 			</div>
