@@ -5,7 +5,7 @@ export interface FilterResponse {
 }
 
 export const fetchFilters = async (): Promise<FilterResponse> => {
-	const response = await fetch('/temp/filterData.json')
+	const response = await fetch('/wwt-frontend-tech-task/temp/filterData.json')
 	if (!response) {
 		throw new Error('Failed to fetch filter data')
 	}

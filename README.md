@@ -8,6 +8,8 @@ The API provides filter data located in the file `filterData.json`
 
 Based on this data, create a filter modal window — [Figma design](https://www.figma.com/file/cnBVURUTntc8peGEfKexoY/WWT-Test-task?type=design&node-id=0%3A1&mode=design&t=GZ0EY5BJ6KB7iy02-1)
 
+[Demo](https://taniavozniuk.github.io/wwt-frontend-tech-task/)
+
 The design should closely follow the layout. If indentations differ slightly in the layout — make them consistent across the modal
 
 The modal window should be opened via a button on the homepage

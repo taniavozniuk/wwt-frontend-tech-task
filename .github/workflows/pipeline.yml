@@ -1,23 +1,56 @@
-name: Pipeline
+# name: Pipeline
 
-on: [push, pull_request]
+# on: [push, pull_request]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [18.x, 20.x]
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{matrix.node-version}}
+
+#       - name: Install pnpm
+#         run: npm install -g pnpm
+
+#       - name: Install dependencies
+#         run: pnpm install
+
+#       - name: Run build
+#         run: npm run build
+
+#       - name: Run format
+#         run: npm run format:check:all
+
+#       - name: Run lint
+#         run: npm run lint:all
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{matrix.node-version}}
+          node-version: 20
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -25,11 +58,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run build
-        run: npm run build
+      - name: Build project
+        run: pnpm run build
 
-      - name: Run format
-        run: npm run format:check:all
-
-      - name: Run lint
-        run: npm run lint:all
+      - name: Deploy to GitHub Pages
+        run: npx gh-pages -d dist
