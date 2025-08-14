@@ -1,1 +1,12 @@
-{}
+{
+	"modalChange": {
+		"title": "Do you want to apply new filter",
+		"useOldFilter": "Use old filter",
+		"applyNewFilter": "Apply new filter"
+	},
+	"modal": {
+		"filter": "Filter",
+		"apply": "Apply",
+		"clearAll": "Clear all parameters"
+	}
+}

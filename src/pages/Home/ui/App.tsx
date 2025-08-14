@@ -1,18 +1,24 @@
-import { useState } from 'react'
-
+import { useFilterStore } from '../../../store/filterStore'
 import { Header } from './Header/Header'
 import { Modal } from './Modal/Modal'
 import { ModalChange } from './ModalChange/ModalChange'
 
 export const App = () => {
-	const [isOpenModal, setIsOpenModal] = useState(false)
-	const [isConfirmModal, setIsConfirmModal] = useState(false)
-	const [selectedFilters, setSelectedFilters] = useState<string[]>([])
-	const [pendingFilters, setPendingFilters] = useState<string[]>([])
+	const {
+		isOpenModal,
+		isConfirmModal,
+		selectedFilters,
+		pendingFilters,
+		setSelectedFilters,
+		setPendingFilters,
+		closeModal,
+		openConfirmModal,
+		closeConfirmModal
+	} = useFilterStore()
 
 	return (
 		<>
-			<Header onOpenModal={() => setIsOpenModal(true)} />
+			<Header />
 
 			<main className="w-full size-100 flex flex-col items-center justify-center">
 				<section>
@@ -29,12 +35,12 @@ export const App = () => {
 
 			{isOpenModal && (
 				<Modal
-					onClose={() => setIsOpenModal(false)}
 					initialSelected={selectedFilters}
+					onClose={closeModal}
 					onConfirm={newFilters => {
 						setPendingFilters(newFilters)
-						setIsOpenModal(false)
-						setIsConfirmModal(true)
+						closeModal()
+						openConfirmModal()
 					}}
 				/>
 			)}
@@ -43,9 +49,9 @@ export const App = () => {
 				<ModalChange
 					onConfirm={() => {
 						setSelectedFilters(pendingFilters)
-						setIsConfirmModal(false)
+						closeConfirmModal()
 					}}
-					onCancel={() => setIsConfirmModal(false)}
+					onCancel={closeConfirmModal}
 				/>
 			)}
 		</>

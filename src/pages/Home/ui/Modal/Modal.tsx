@@ -1,6 +1,5 @@
-/* eslint-disable i18next/no-literal-string */
-// без вимкення лінтера не пропускає текст(помилка)
 import React, { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -8,22 +7,26 @@ import { useQuery } from '@tanstack/react-query'
 import { FilterResponse, fetchFilters } from '@/api'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
-import CloseIcon from '../../../../image/CLose.svg'
+import CloseIcon from '../../../../image/CloseBt.svg'
 
 interface ModalProps {
-	onClose: () => void
 	initialSelected: string[]
 	onConfirm: (filters: string[]) => void
+	onClose: () => void
 }
 
 export const Modal: React.FC<ModalProps> = ({
-	onClose,
 	initialSelected,
-	onConfirm
+	onConfirm,
+	onClose
 }) => {
 	const modalRef = useRef<HTMLDivElement>(null)
+	// const { onClose, onConfirm, initialSelected } = useFilterStore()
 	const [selected, setSelected] = useState<string[]>(initialSelected)
+	const { t } = useTranslation()
+
 	useOutsideClick(modalRef, onClose)
+
 	const { data: filterData } = useQuery<FilterResponse>({
 		queryKey: ['filters'],
 		queryFn: fetchFilters
@@ -47,7 +50,7 @@ export const Modal: React.FC<ModalProps> = ({
 			>
 				<div className="flex items-center justify-between">
 					<h2 className="font-inter font-medium text-[40px] text-center flex-1">
-						Filter
+						{t('modal.filter')}
 					</h2>
 					<button className="w-[24px] h-[24px]">
 						<CloseIcon
@@ -63,7 +66,7 @@ export const Modal: React.FC<ModalProps> = ({
 						className="mt-8 "
 					>
 						<h3 className="font-inter font-medium text-[24px] flex-1  mb-6">
-							{filter.name}
+							{t(filter.name)}
 						</h3>
 						{filter.options.map(option => (
 							<label
@@ -76,7 +79,7 @@ export const Modal: React.FC<ModalProps> = ({
 									checked={selected.includes(option.id)}
 									onChange={() => toggleOption(option.id)}
 								/>
-								{option.name}
+								{t(option.name)}
 							</label>
 						))}
 						<div className="mx-auto mt-[25px] w-[100%] h-[2px] bg-gray-500"></div>
@@ -88,14 +91,14 @@ export const Modal: React.FC<ModalProps> = ({
 						className="absolute left-1/2 -translate-x-1/2 w-[184px] h-[64px] rounded-lg bg-orange-500 text-white font-inter"
 						onClick={() => onConfirm(selected)}
 					>
-						apply
+						{t('modal.apply')}
 					</button>
 					<p
 						className="ml-auto text-blue cursor-pointer underline"
 						style={{ color: '#078691' }}
 						onClick={handleReset}
 					>
-						Clear all parameters
+						{t('modal.clearAll')}
 					</p>
 				</div>
 			</div>

@@ -1,13 +1,9 @@
-import React from 'react'
-
 import FilterIcon from '../../../../image/filter.svg'
 import logo from '../../../../image/media.png'
+import { useFilterStore } from '../../../../store/filterStore'
 
-interface HeaderProps {
-	onOpenModal: () => void
-}
-
-export const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
+export const Header: React.FC = () => {
+	const { openModal } = useFilterStore()
 	return (
 		<header
 			className="w-full h-15 flex items-center justify-between px-5"
@@ -27,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
 			>
 				<button
 					className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center p-0 cursor-pointer"
-					onClick={onOpenModal}
+					onClick={openModal}
 					aria-label="Відкрити фільтри"
 				>
 					<FilterIcon />

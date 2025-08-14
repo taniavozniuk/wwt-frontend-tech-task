@@ -1,9 +1,10 @@
 /* eslint-disable i18next/no-literal-string */
 import React, { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
-import CloseIcon from '../../../../image/CLose.svg'
+import CloseIcon from '../../../../image/CloseBt.svg'
 
 interface ModalChangeProps {
 	onConfirm: () => void
@@ -16,6 +17,7 @@ export const ModalChange: React.FC<ModalChangeProps> = ({
 }) => {
 	const modalRef = useRef<HTMLDivElement>(null)
 	useOutsideClick(modalRef, onCancel)
+	const { t } = useTranslation()
 	return (
 		<div className="fixed inset-0 bg-black/30 flex items-center justify-center z-10 px-20">
 			<div
@@ -24,7 +26,7 @@ export const ModalChange: React.FC<ModalChangeProps> = ({
 			>
 				<div className="flex items-center justify-between mb-10">
 					<h2 className="font-inter font-medium text-[40px] text-center flex-1">
-						Do you want to apply new filter
+						{t('modalChange.title')} {/* "Do you want to apply new filter" */}
 					</h2>
 					<button className="w-[24px] h-[24px]">
 						<CloseIcon
