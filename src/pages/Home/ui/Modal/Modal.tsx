@@ -9,7 +9,6 @@ import { FilterResponse, fetchFilters } from '@/api'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 import CloseIcon from '../../../../image/CLose.svg'
-import './Modal.css'
 
 interface ModalProps {
 	onClose: () => void
