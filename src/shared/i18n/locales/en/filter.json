@@ -1,4 +1,7 @@
 {
+  "main":{
+    "title": "WinWinTravel frontend test task"
+  },
 	"modalChange": {
 		"title": "Do you want to apply new filter",
 		"useOldFilter": "Use old filter",

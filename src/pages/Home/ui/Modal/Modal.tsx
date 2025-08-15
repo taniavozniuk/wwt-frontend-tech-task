@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 import { useQuery } from '@tanstack/react-query'
 
-// eslint-disable-next-line no-restricted-syntax
-import { FilterResponse, fetchFilters } from '@/api'
+import { FilterResponse, fetchFilters } from '@api'
+
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 import CloseIcon from '../../../../image/CloseBt.svg'
@@ -21,7 +21,6 @@ export const Modal: React.FC<ModalProps> = ({
 	onClose
 }) => {
 	const modalRef = useRef<HTMLDivElement>(null)
-	// const { onClose, onConfirm, initialSelected } = useFilterStore()
 	const [selected, setSelected] = useState<string[]>(initialSelected)
 	const { t } = useTranslation()
 
